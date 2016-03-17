@@ -27,7 +27,7 @@ module Pzle
     end
     
     def has_attr?
-      !@attr.nil? || !@attr.empty?
+      !(@attr.nil? || @attr.empty?)
     end
     
     def attr
@@ -43,14 +43,14 @@ module Pzle
     end
 
     def text
-      unless @text.tag?
-        @text.to_s
-      else
+      if @text.array? && !@text.tag?
         ret = []
         @text.each do|v|
           ret.push v.to_s
         end
         ret.join('')
+      else
+        @text.to_s
       end
     end
     
